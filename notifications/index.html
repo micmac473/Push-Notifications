@@ -25,7 +25,7 @@
 
         var sendNotification = function(){
 			var text = $('input.create-notification').val();
-			$.post('/notifications/notification/', {message: text}).success(function(){
+			$.post('/PushNotifications/notifications/notification/', {message: text}).success(function(){
 				console.log('Notification sent!');
 		});
 	};

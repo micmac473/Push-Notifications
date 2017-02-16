@@ -1,6 +1,6 @@
 <?php 
 
-require(dirname(__FILE__).'/../../../vendor/autoload.php');
+require(dirname(__FILE__).'/../../vendor/autoload.php');
 
 $pusher = new Pusher('f98c77f6aea9e4b0fd0c', '2b1a3973cb136390c2bb', '303123');
 
