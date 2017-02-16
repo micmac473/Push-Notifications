@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>Realtime Notifications</title>
+    <script src="//js.pusher.com/3.1/pusher.min.js" type="text/javascript"></script>
+    <script src="//code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+</head>
+<body>
+	<input class="create-notification" placeholder="Send a notification :)"></input>
+	<button class="submit-notification">Go!</button>
+    
+
+    <script>
+
+        var pusher = new Pusher('f98c77f6aea9e4b0fd0c');
+
+        var notificationsChannel = pusher.subscribe('notifications');
+
+        notificationsChannel.bind('new_notification', function(notification){
+            var message = notification.message;
+            $('div.notification').text(message);
+            toastr.success(message)
+        });
+
+        var sendNotification = function(){
+			var text = $('input.create-notification').val();
+			$.post('/notifications/notification/', {message: text}).success(function(){
+				console.log('Notification sent!');
+		});
+	};
+	$('button.submit-notification').on('click', sendNotification);
+
+    </script>
+
+</body>
+</html>
